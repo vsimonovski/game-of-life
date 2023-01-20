@@ -1,8 +1,12 @@
-import * as React from 'react';
-import { render } from 'react-dom';
-import { App } from './App';
+import React, { StrictMode } from "react";
+import { render } from "react-dom";
+import { App } from "./App";
+import GlobalStyle from "./globalStyles";
 
 render(
-  <App />,
-  document.getElementById('root'),
+  <StrictMode>
+    <GlobalStyle />
+    <App />
+  </StrictMode>,
+  document.getElementById("root")
 );
