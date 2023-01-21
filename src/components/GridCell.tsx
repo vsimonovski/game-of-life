@@ -9,6 +9,16 @@ const Cell = styled.div`
     isAlive ? '#f1c40f' : '#242424'};
   transition: background-color 0.4s ease-out;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 10px;
+    height: 10px;
+  }
+
+  @media (max-width: 480px) {
+    width: 6px;
+    height: 6px;
+  }
 `;
 
 interface GridCellProps {

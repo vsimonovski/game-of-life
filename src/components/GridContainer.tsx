@@ -14,10 +14,11 @@ import {
 
 const Container = styled.section`
   display: grid;
+  margin: 0 auto;
   grid-template-columns: ${({ gridSize }: { gridSize: GridSize }) =>
-    `repeat(${gridSize.cols}, 15px);`};
+    `repeat(${gridSize.cols}, 1fr);`};
   grid-template-rows: ${({ gridSize }: { gridSize: GridSize }) =>
-    `repeat(${gridSize.rows}, 15px);`};
+    `repeat(${gridSize.rows}, 1fr);`};
   border: 1px solid #555;
   grid-gap: 1px;
   background-color: #555;

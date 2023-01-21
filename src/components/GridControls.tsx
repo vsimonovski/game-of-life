@@ -15,6 +15,9 @@ const Container = styled.section`
   flex-wrap: wrap;
   justify-content: space-between;
   padding-top: 16px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const StyledButton = styled.button`
@@ -22,7 +25,7 @@ const StyledButton = styled.button`
   width: 200px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 700;
   background-color: #1a1a1a;
   cursor: pointer;
@@ -31,6 +34,16 @@ const StyledButton = styled.button`
   color: ${(props) => (props.disabled ? 'gray' : 'inherit')};
   &:hover {
     border-color: #f1c40f;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin: 8px auto;
+  }
+
+  @media (max-width: 480px) {
+    width: 70%;
+    font-size: 0.8rem;
   }
 `;
 
@@ -60,7 +73,12 @@ const GridControls = () => {
       <StyledButton disabled={isBtnDisabled} onClick={handleGridReset}>
         Reset
       </StyledButton>
-      <StyledButton onClick={handleRandomiseGrid}>Randomise</StyledButton>
+      <StyledButton
+        disabled={isSimulationRunning}
+        onClick={handleRandomiseGrid}
+      >
+        Randomise
+      </StyledButton>
     </Container>
   );
 };

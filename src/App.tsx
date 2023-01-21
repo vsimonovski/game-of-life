@@ -10,8 +10,12 @@ const Container = styled.section`
 `;
 
 const StyledHeader = styled.h1`
-  font-size: 52px;
+  font-size: 3rem;
   text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 
 export function App() {

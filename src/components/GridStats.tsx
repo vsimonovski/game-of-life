@@ -9,13 +9,23 @@ import {
 const Container = styled.section`
   display: flex;
   margin: 0 auto;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
 `;
 
 const StyledParagraph = styled.p`
   font-weight: 500;
-  font-size: 18px;
+  font-size: 1rem;
   margin: 0;
   padding: 16px;
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+    padding: 4px;
+    text-align: center;
+  }
 `;
 
 const GridStats = () => {
