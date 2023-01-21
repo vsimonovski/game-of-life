@@ -1,6 +1,9 @@
-import { CoordinateValue } from './types/Grid';
+import { CoordinateValue, GridSize } from './types/Grid';
 
-export const GRID_SIZE = 20;
+export const GRID_SIZE: GridSize = {
+  rows: 20,
+  cols: 50,
+};
 export const INTERVAL_MS = 200;
 export const NEIGHBOUR_CELL_COORDINATES: CoordinateValue[][] = [
   [0, 1],

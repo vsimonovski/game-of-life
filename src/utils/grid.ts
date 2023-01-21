@@ -1,8 +1,8 @@
-import { Grid, NeighbourCellCoordinates } from '../types/Grid';
+import { Grid, GridSize, NeighbourCellCoordinates } from '../types/Grid';
 
-export const initialiseGrid = (size: number): Grid => {
-  return Array.from({ length: size }, () =>
-    Array.from({ length: size }, () => false)
+export const initialiseGrid = (gridSize: GridSize): Grid => {
+  return Array.from({ length: gridSize.rows }, () =>
+    Array.from({ length: gridSize.cols }, () => false)
   );
 };
 
@@ -21,14 +21,14 @@ export const updateGridCell = (
 
 export const countNeighbourCells = (
   neighbourCellCoordinates: NeighbourCellCoordinates,
-  gridSize: number,
+  gridSize: GridSize,
   grid: Grid,
   row: number,
   col: number
 ): number => {
   return neighbourCellCoordinates.reduce((count, [x, y]) => {
-    const currRow = (x + row + gridSize) % gridSize;
-    const currCol = (y + col + gridSize) % gridSize;
+    const currRow = (x + row + gridSize.rows) % gridSize.rows;
+    const currCol = (y + col + gridSize.cols) % gridSize.cols;
     return count + Number(grid[currRow][currCol]);
   }, 0);
 };

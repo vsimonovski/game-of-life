@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import GridCell from './components/GridCell';
 import { GRID_SIZE, INTERVAL_MS, NEIGHBOUR_CELL_COORDINATES } from './config';
+import { GridSize } from './types/Grid';
 import {
   countNeighbourCells,
   initialiseGrid,
@@ -10,11 +11,14 @@ import {
 
 const Container = styled.section`
   display: grid;
-  grid-template-columns: ${({ gridSize }: { gridSize: number }) =>
-    `repeat(${gridSize}, 20px);`};
+  grid-template-columns: ${({ gridSize }: { gridSize: GridSize }) =>
+    `repeat(${gridSize.cols}, 20px);`};
+  grid-template-rows: ${({ gridSize }: { gridSize: GridSize }) =>
+    `repeat(${gridSize.rows}, 20px);`};
   border: 1px solid #333;
   grid-gap: 1px;
   background-color: #333;
+  width: fit-content;
 `;
 
 export function App() {
