@@ -1,0 +1,83 @@
+import React, { useEffect, useCallback } from 'react';
+import styled from 'styled-components';
+import { countNeighbourCells } from 'utils/grid';
+import { GridSize } from 'types/Grid';
+import { GRID_SIZE, NEIGHBOUR_CELL_COORDINATES, INTERVAL_MS } from 'config';
+import GridCell from 'components/GridCell';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectSimulationStatus,
+  selectCells,
+  SET_CELL_VALUE,
+  INCREASE_GENERATION_NUM,
+} from 'components/gridSlice';
+
+const Container = styled.section`
+  display: grid;
+  grid-template-columns: ${({ gridSize }: { gridSize: GridSize }) =>
+    `repeat(${gridSize.cols}, 15px);`};
+  grid-template-rows: ${({ gridSize }: { gridSize: GridSize }) =>
+    `repeat(${gridSize.rows}, 15px);`};
+  border: 1px solid #555;
+  grid-gap: 1px;
+  background-color: #555;
+  width: fit-content;
+`;
+
+const GridContainer = () => {
+  const dispatch = useDispatch();
+  const isSimulationRunning = useSelector(selectSimulationStatus);
+  const cells = useSelector(selectCells);
+
+  const onCellClick = useCallback(
+    (rowId: number, colId: number) => {
+      dispatch(SET_CELL_VALUE(rowId, colId));
+    },
+    [dispatch]
+  );
+
+  useEffect(() => {
+    if (!isSimulationRunning) return;
+
+    const simulationInterval = setInterval(() => {
+      dispatch(INCREASE_GENERATION_NUM());
+
+      cells.forEach((rows, rowId) =>
+        rows.forEach((_, colId) => {
+          const count = countNeighbourCells(
+            NEIGHBOUR_CELL_COORDINATES,
+            GRID_SIZE,
+            cells,
+            rowId,
+            colId
+          );
+
+          if (cells[rowId][colId] && (count < 2 || count > 3))
+            dispatch(SET_CELL_VALUE(rowId, colId));
+
+          if (!cells[rowId][colId] && count === 3)
+            dispatch(SET_CELL_VALUE(rowId, colId));
+        })
+      );
+    }, INTERVAL_MS);
+
+    return () => clearInterval(simulationInterval);
+  }, [isSimulationRunning, cells, dispatch]);
+
+  return (
+    <Container gridSize={GRID_SIZE}>
+      {cells.map((rows, rowId) =>
+        rows.map((_, colId) => (
+          <GridCell
+            isAlive={cells[rowId][colId]}
+            key={`${rowId}${colId}`}
+            rowId={rowId}
+            colId={colId}
+            handleCellClick={onCellClick}
+          />
+        ))
+      )}
+    </Container>
+  );
+};
+export default GridContainer;

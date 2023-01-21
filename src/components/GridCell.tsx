@@ -2,12 +2,13 @@ import React, { memo, FC } from 'react';
 import styled from 'styled-components';
 
 const Cell = styled.div`
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   background-color: #fff;
   background-color: ${({ isAlive }: { isAlive: boolean }) =>
-    isAlive ? '#9b59b6' : '#fff'};
-  transition: background-color 0.2s ease;
+    isAlive ? '#f1c40f' : '#242424'};
+  transition: background-color 0.4s ease-out;
+  cursor: pointer;
 `;
 
 interface GridCellProps {

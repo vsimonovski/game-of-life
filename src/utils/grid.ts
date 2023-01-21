@@ -1,21 +1,16 @@
-import { Grid, GridSize, NeighbourCellCoordinates } from '../types/Grid';
+import { RANDOM_FACTOR } from 'config';
+import { Grid, GridSize, NeighbourCellCoordinates } from 'types/Grid';
 
-export const initialiseGrid = (gridSize: GridSize): Grid => {
-  return Array.from({ length: gridSize.rows }, () =>
-    Array.from({ length: gridSize.cols }, () => false)
-  );
-};
-
-export const updateGridCell = (
-  grid: Grid,
-  row: number,
-  col: number,
-  value: boolean
+export const initialiseGrid = (
+  gridSize: GridSize,
+  isRandomInitialValue?: boolean
 ): Grid => {
-  return grid.map((rows, rowId) =>
-    row === rowId
-      ? rows.map((cell, colId) => (col === colId ? value : cell))
-      : rows
+  return Array.from({ length: gridSize.rows }, () =>
+    Array.from({ length: gridSize.cols }, () => {
+      if (isRandomInitialValue)
+        return Math.random() > RANDOM_FACTOR ? true : false;
+      return false;
+    })
   );
 };
 
