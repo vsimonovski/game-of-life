@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "build:serve": "npx serve -s build"
   },
   "browserslist": {
     "production": [
@@ -20,16 +21,16 @@
   },
   "devDependencies": {
     "@reduxjs/toolkit": "^1.9.1",
-    "@types/react": "^16.9.35",
-    "@types/react-dom": "^16.9.8",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
     "@types/react-redux": "^7.1.25",
-    "@types/styled-components": "^5.1.2",
+    "@types/styled-components": "^5.1.26",
     "prettier": "^2.8.3",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
-    "react-scripts": "^3.4.1",
-    "styled-components": "^5.1.1",
+    "react-scripts": "^5.0.1",
+    "styled-components": "^5.3.6",
     "typescript": "^4.9.4"
   }
 }
