@@ -1,16 +1,16 @@
 import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import { countNeighbourCells } from 'utils/grid';
-import { GridSize } from 'types/Grid';
+import { countNeighbourCells } from 'utils/cell';
+import { GridSize } from 'types';
 import { GRID_SIZE, NEIGHBOUR_CELL_COORDINATES, INTERVAL_MS } from 'config';
-import GridCell from 'components/GridCell';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectSimulationStatus,
   selectCells,
   SET_CELL_VALUE,
   INCREASE_GENERATION_NUM,
-} from 'components/gridSlice';
+} from 'components/simulationSlice';
+import Cell from 'components/Cell';
 
 const Container = styled.section`
   display: grid;
@@ -25,7 +25,7 @@ const Container = styled.section`
   width: fit-content;
 `;
 
-const GridContainer = () => {
+const CellContainer = () => {
   const dispatch = useDispatch();
   const isSimulationRunning = useSelector(selectSimulationStatus);
   const cells = useSelector(selectCells);
@@ -69,7 +69,7 @@ const GridContainer = () => {
     <Container gridSize={GRID_SIZE}>
       {cells.map((rows, rowId) =>
         rows.map((_, colId) => (
-          <GridCell
+          <Cell
             isAlive={cells[rowId][colId]}
             key={`${rowId}${colId}`}
             rowId={rowId}
@@ -81,4 +81,4 @@ const GridContainer = () => {
     </Container>
   );
 };
-export default GridContainer;
+export default CellContainer;

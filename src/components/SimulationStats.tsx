@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import {
   selectNumOfGenerations,
   selectNumOfLivingCells,
-} from 'components/gridSlice';
+} from 'components/simulationSlice';
 
 const Container = styled.section`
   display: flex;
@@ -28,7 +28,7 @@ const StyledParagraph = styled.p`
   }
 `;
 
-const GridStats = () => {
+const SimulationStats = () => {
   const numOfLivingCells = useSelector(selectNumOfLivingCells);
   const numOfGenerations = useSelector(selectNumOfGenerations);
   return (
@@ -38,4 +38,4 @@ const GridStats = () => {
     </Container>
   );
 };
-export default GridStats;
+export default SimulationStats;

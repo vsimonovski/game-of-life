@@ -1,4 +1,4 @@
-import { CoordinateValue, GridSize } from 'types/Grid';
+import { CoordinateValue, GridSize } from 'types';
 
 export const GRID_SIZE: GridSize = {
   rows: 20,

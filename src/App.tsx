@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import GridControls from 'components/GridControls';
-import GridContainer from 'components/GridContainer';
-import GridStats from 'components/GridStats';
+import SimulationControls from 'components/SimulationControls';
+import CellContainer from 'components/CellContainer';
+import SimulationStats from 'components/SimulationStats';
 
 const Container = styled.section`
   display: flex;
@@ -23,9 +23,9 @@ export function App() {
     <>
       <StyledHeader>Game of Life</StyledHeader>
       <Container>
-        <GridContainer />
-        <GridControls />
-        <GridStats />
+        <CellContainer />
+        <SimulationControls />
+        <SimulationStats />
       </Container>
     </>
   );

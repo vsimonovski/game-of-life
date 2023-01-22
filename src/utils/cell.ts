@@ -1,10 +1,10 @@
 import { RANDOM_FACTOR } from 'config';
-import { Grid, GridSize, NeighbourCellCoordinates } from 'types/Grid';
+import { Cells, GridSize, NeighbourCellCoordinates } from 'types';
 
-export const initialiseGrid = (
+export const initialiseCells = (
   gridSize: GridSize,
   isRandomInitialValue?: boolean
-): Grid => {
+): Cells => {
   return Array.from({ length: gridSize.rows }, () =>
     Array.from({ length: gridSize.cols }, () => {
       if (isRandomInitialValue)
@@ -17,7 +17,7 @@ export const initialiseGrid = (
 export const countNeighbourCells = (
   neighbourCellCoordinates: NeighbourCellCoordinates,
   gridSize: GridSize,
-  grid: Grid,
+  grid: Cells,
   row: number,
   col: number
 ): number => {

@@ -1,26 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from 'store';
-import { initialiseGrid } from 'utils/grid';
+import { initialiseCells } from 'utils/cell';
 import { GRID_SIZE } from 'config';
-import { Grid } from 'types/Grid';
+import { Cells } from 'types';
 
-interface GridState {
+interface SimulationState {
   isSimulationRunning: boolean;
-  cells: Grid;
+  cells: Cells;
   numOfLivingCells: number;
   numOfGenerations: number;
 }
 
-const initialState: GridState = {
+const initialState: SimulationState = {
   isSimulationRunning: false,
-  cells: initialiseGrid(GRID_SIZE),
+  cells: initialiseCells(GRID_SIZE),
   numOfLivingCells: 0,
   numOfGenerations: 0,
 };
 
-export const gridSlice = createSlice({
-  name: 'grid',
+export const simulationSlice = createSlice({
+  name: 'simulation',
   initialState,
   reducers: {
     SIMULATION_START: (state) => {
@@ -31,7 +31,7 @@ export const gridSlice = createSlice({
     },
     SIMULATION_RESET: () => initialState,
     SIMULATION_RANDOMISE: (state) => {
-      state.cells = initialiseGrid(GRID_SIZE, true);
+      state.cells = initialiseCells(GRID_SIZE, true);
       state.numOfGenerations = 0;
       state.numOfLivingCells = 0;
       state.cells.forEach(
@@ -71,14 +71,14 @@ export const {
   SIMULATION_RANDOMISE,
   SET_CELL_VALUE,
   INCREASE_GENERATION_NUM,
-} = gridSlice.actions;
+} = simulationSlice.actions;
 
 export const selectSimulationStatus = (state: RootState) =>
-  state.grid.isSimulationRunning;
-export const selectCells = (state: RootState) => state.grid.cells;
+  state.simulation.isSimulationRunning;
+export const selectCells = (state: RootState) => state.simulation.cells;
 export const selectNumOfLivingCells = (state: RootState) =>
-  state.grid.numOfLivingCells;
+  state.simulation.numOfLivingCells;
 export const selectNumOfGenerations = (state: RootState) =>
-  state.grid.numOfGenerations;
+  state.simulation.numOfGenerations;
 
-export default gridSlice.reducer;
+export default simulationSlice.reducer;

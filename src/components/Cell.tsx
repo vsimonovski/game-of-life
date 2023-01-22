@@ -1,7 +1,7 @@
 import React, { memo, FC } from 'react';
 import styled from 'styled-components';
 
-const Cell = styled.div`
+const StyledCell = styled.div`
   width: 15px;
   height: 15px;
   background-color: #fff;
@@ -21,24 +21,15 @@ const Cell = styled.div`
   }
 `;
 
-interface GridCellProps {
+interface CellProps {
   isAlive: boolean;
   rowId: number;
   colId: number;
   handleCellClick: (rowId: number, coldId: number) => void;
 }
 
-const GridCell: FC<GridCellProps> = ({
-  isAlive,
-  handleCellClick,
-  rowId,
-  colId,
-}) => {
-  return (
-    <Cell
-      isAlive={isAlive}
-      onClick={() => handleCellClick(rowId, colId)}
-    ></Cell>
-  );
-};
-export default memo(GridCell);
+const Cell: FC<CellProps> = ({ isAlive, handleCellClick, rowId, colId }) => (
+  <StyledCell isAlive={isAlive} onClick={() => handleCellClick(rowId, colId)} />
+);
+
+export default memo(Cell);
