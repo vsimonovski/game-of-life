@@ -8,7 +8,8 @@
     "build:serve": "npx serve -s build",
     "test": "jest",
     "cypress:run": "cypress run",
-    "cypress:open": "cypress open --browser electron --e2e"
+    "cypress:open": "cypress open --browser electron --e2e",
+    "prepare": "husky install"
   },
   "browserslist": {
     "production": [
@@ -22,10 +23,21 @@
       "last 1 safari version"
     ]
   },
+  "lint-staged": {
+    "*.{js,ts,tsx,html}": [
+      "prettier --write"
+    ],
+    "*.{ts, tsx}": [
+      "eslint --fix",
+      "jest --bail --findRelatedTests"
+    ]
+  },
   "devDependencies": {
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.18.6",
+    "@commitlint/cli": "^17.4.2",
+    "@commitlint/config-conventional": "^17.4.2",
     "@reduxjs/toolkit": "^1.9.1",
     "@types/jest": "^29.2.6",
     "@types/react": "^18.0.27",
@@ -38,7 +50,9 @@
     "cypress": "^12.3.0",
     "eslint": "^8.32.0",
     "eslint-plugin-react": "^7.32.1",
+    "husky": "^8.0.0",
     "jest": "^27.5.1",
+    "lint-staged": "^13.1.0",
     "prettier": "^2.8.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -47,5 +61,8 @@
     "react-test-renderer": "^18.2.0",
     "styled-components": "^5.3.6",
     "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "eslint-plugin-jest": "^27.2.1"
   }
 }
