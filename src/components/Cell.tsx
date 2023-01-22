@@ -29,7 +29,11 @@ interface CellProps {
 }
 
 const Cell: FC<CellProps> = ({ isAlive, handleCellClick, rowId, colId }) => (
-  <StyledCell isAlive={isAlive} onClick={() => handleCellClick(rowId, colId)} />
+  <StyledCell
+    data-cy="cell"
+    isAlive={isAlive}
+    onClick={() => handleCellClick(rowId, colId)}
+  />
 );
 
 export default memo(Cell);

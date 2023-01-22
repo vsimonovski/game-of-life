@@ -33,11 +33,12 @@ interface ButtonProps {
   isDisabled: boolean;
   onClick: () => void;
   children: React.ReactNode;
+  dataCy: string;
 }
 
-const Button: FC<ButtonProps> = ({ isDisabled, onClick, children }) => {
+const Button: FC<ButtonProps> = ({ isDisabled, onClick, children, dataCy }) => {
   return (
-    <StyledButton disabled={isDisabled} onClick={onClick}>
+    <StyledButton disabled={isDisabled} onClick={onClick} data-cy={dataCy}>
       {children}
     </StyledButton>
   );

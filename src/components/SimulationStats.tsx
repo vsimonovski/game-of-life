@@ -33,8 +33,12 @@ const SimulationStats = () => {
   const numOfGenerations = useSelector(selectNumOfGenerations);
   return (
     <Container>
-      <StyledParagraph>Generations: {numOfGenerations}</StyledParagraph>
-      <StyledParagraph>Living Cells: {numOfLivingCells}</StyledParagraph>
+      <StyledParagraph data-cy="generations-label">
+        Generations: {numOfGenerations}
+      </StyledParagraph>
+      <StyledParagraph data-cy="living-cells-label">
+        Living Cells: {numOfLivingCells}
+      </StyledParagraph>
     </Container>
   );
 };

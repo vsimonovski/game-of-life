@@ -18,7 +18,7 @@ const StyledHeader = styled.h1`
 export function App() {
   return (
     <>
-      <StyledHeader>Game of Life</StyledHeader>
+      <StyledHeader data-cy="title">Game of Life</StyledHeader>
       <Container>
         <CellContainer />
         <SimulationControls />

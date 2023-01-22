@@ -42,13 +42,22 @@ const SimulationControls = () => {
 
   return (
     <Container>
-      <Button isDisabled={isBtnDisabled} onClick={handleSimulationStatusChange}>
+      <Button
+        dataCy="run-btn"
+        isDisabled={isBtnDisabled}
+        onClick={handleSimulationStatusChange}
+      >
         {isSimulationRunning ? 'Stop' : 'Start'} simulation
       </Button>
-      <Button isDisabled={isBtnDisabled} onClick={handleSimulationReset}>
+      <Button
+        dataCy="reset-btn"
+        isDisabled={isBtnDisabled}
+        onClick={handleSimulationReset}
+      >
         Reset
       </Button>
       <Button
+        dataCy="randomise-btn"
         isDisabled={isSimulationRunning}
         onClick={handleSimulationRandomise}
       >
