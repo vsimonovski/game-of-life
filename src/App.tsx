@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { device } from 'globalStyles';
 import SimulationControls from 'components/SimulationControls';
 import CellContainer from 'components/CellContainer';
 import SimulationStats from 'components/SimulationStats';
