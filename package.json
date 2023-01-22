@@ -6,7 +6,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "build:serve": "npx serve -s build",
-    "test": "jest"
+    "test": "jest",
+    "cypress:run": "cypress run",
+    "cypress:open": "cypress open --browser electron --e2e"
   },
   "browserslist": {
     "production": [
@@ -31,6 +33,7 @@
     "@types/react-redux": "^7.1.25",
     "@types/styled-components": "^5.1.26",
     "babel-jest": "^29.3.1",
+    "cypress": "^12.3.0",
     "jest": "^27.5.1",
     "prettier": "^2.8.3",
     "react": "^18.2.0",
