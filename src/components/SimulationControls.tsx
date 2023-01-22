@@ -10,13 +10,14 @@ import {
   selectNumOfLivingCells,
 } from 'components/simulationSlice';
 import Button from './Button';
+import { device } from 'globalStyles';
 
 const Container = styled.section`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding-top: 16px;
-  @media (max-width: 768px) {
+  padding-top: var(--size-sm);
+  @media ${device.tablet} {
     flex-direction: column;
   }
 `;

@@ -5,25 +5,25 @@ import {
   selectNumOfGenerations,
   selectNumOfLivingCells,
 } from 'components/simulationSlice';
+import { device } from 'globalStyles';
 
 const Container = styled.section`
   display: flex;
   margin: 0 auto;
 
-  @media (max-width: 480px) {
+  @media ${device.mobile} {
     flex-direction: column;
   }
 `;
 
 const StyledParagraph = styled.p`
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 1.6em;
   margin: 0;
-  padding: 16px;
+  padding: var(--size-sm);
 
-  @media (max-width: 480px) {
-    font-size: 0.8rem;
-    padding: 4px;
+  @media ${device.mobile} {
+    padding: var(--size-xxs);
     text-align: center;
   }
 `;

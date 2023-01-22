@@ -19,9 +19,9 @@ const Container = styled.section`
     `repeat(${gridSize.cols}, 1fr);`};
   grid-template-rows: ${({ gridSize }: { gridSize: GridSize }) =>
     `repeat(${gridSize.rows}, 1fr);`};
-  border: 1px solid #555;
+  border: 1px solid var(--color-gray-100);
   grid-gap: 1px;
-  background-color: #555;
+  background-color: var(--color-gray-100);
   width: fit-content;
 `;
 

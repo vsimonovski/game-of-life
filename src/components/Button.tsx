@@ -1,29 +1,30 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { device } from 'globalStyles';
 
 const StyledButton = styled.button`
-  border-radius: 8px;
+  border-radius: var(--size-xs);
   width: 200px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
-  font-size: 1rem;
+  font-size: 1.6em;
   font-weight: 700;
-  background-color: #1a1a1a;
+  background-color: var(--color-dark);
   cursor: pointer;
   transition: border-color 0.25s;
   height: 43px;
-  color: ${(props) => (props.disabled ? 'gray' : 'inherit')};
+  color: ${(props) => (props.disabled ? 'var(--color-gray)' : 'inherit')};
   &:hover {
-    border-color: #f1c40f;
+    border-color: var(--color-accent);
   }
 
-  @media (max-width: 768px) {
+  @media ${device.tablet} {
     width: 100%;
     margin: 8px auto;
   }
 
-  @media (max-width: 480px) {
-    width: 70%;
+  @media ${device.mobile} {
+    width: 100%;
     font-size: 0.8rem;
   }
 `;

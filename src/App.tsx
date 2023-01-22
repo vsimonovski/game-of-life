@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { device } from 'globalStyles';
 import SimulationControls from 'components/SimulationControls';
 import CellContainer from 'components/CellContainer';
 import SimulationStats from 'components/SimulationStats';
@@ -10,12 +11,8 @@ const Container = styled.section`
 `;
 
 const StyledHeader = styled.h1`
-  font-size: 3rem;
+  font-size: 4.8em;
   text-align: center;
-
-  @media (max-width: 768px) {
-    font-size: 2rem;
-  }
 `;
 
 export function App() {
