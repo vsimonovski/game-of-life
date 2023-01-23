@@ -1,16 +1,8 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { FC } from 'react';
 import styled from 'styled-components';
-import {
-  selectSimulationStatus,
-  SIMULATION_START,
-  SIMULATION_PAUSE,
-  SIMULATION_RESET,
-  SIMULATION_RANDOMISE,
-  selectNumOfLivingCells,
-} from 'components/simulationSlice';
 import Button from './Button';
 import { device } from 'globalStyles';
+import { Cells } from 'types';
 
 const Container = styled.section`
   display: flex;
@@ -22,44 +14,43 @@ const Container = styled.section`
   }
 `;
 
-const SimulationControls = () => {
-  const dispatch = useDispatch();
-  const isSimulationRunning = useSelector(selectSimulationStatus);
-  const numOfLivingCells = useSelector(selectNumOfLivingCells);
-  const isBtnDisabled = !numOfLivingCells && !isSimulationRunning;
+interface SimulationControlsProps {
+  onSimulationReset: () => void;
+  onSimulationRandomise: () => void;
+  onSimulationRun: () => void;
+  isSimulationRunning: boolean;
+  numOfLiveCells: number;
+}
 
-  const handleSimulationStatusChange = () => {
-    dispatch(!isSimulationRunning ? SIMULATION_START() : SIMULATION_PAUSE());
-  };
-
-  const handleSimulationReset = () => {
-    dispatch(SIMULATION_RESET());
-  };
-
-  const handleSimulationRandomise = () => {
-    dispatch(SIMULATION_RANDOMISE());
-  };
+const SimulationControls: FC<SimulationControlsProps> = ({
+  onSimulationReset,
+  onSimulationRandomise,
+  onSimulationRun,
+  isSimulationRunning,
+  numOfLiveCells,
+}) => {
+  const isBtnDisabled = !numOfLiveCells && !isSimulationRunning;
 
   return (
     <Container>
       <Button
         dataCy="run-btn"
+        onClick={onSimulationRun}
         isDisabled={isBtnDisabled}
-        onClick={handleSimulationStatusChange}
       >
         {isSimulationRunning ? 'Stop' : 'Start'} simulation
       </Button>
       <Button
         dataCy="reset-btn"
         isDisabled={isBtnDisabled}
-        onClick={handleSimulationReset}
+        onClick={onSimulationReset}
       >
         Reset
       </Button>
       <Button
         dataCy="randomise-btn"
         isDisabled={isSimulationRunning}
-        onClick={handleSimulationRandomise}
+        onClick={onSimulationRandomise}
       >
         Randomise
       </Button>

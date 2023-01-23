@@ -1,10 +1,5 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { FC } from 'react';
 import styled from 'styled-components';
-import {
-  selectNumOfGenerations,
-  selectNumOfLivingCells,
-} from 'components/simulationSlice';
 import { device } from 'globalStyles';
 
 const Container = styled.section`
@@ -28,16 +23,22 @@ const StyledParagraph = styled.p`
   }
 `;
 
-const SimulationStats = () => {
-  const numOfLivingCells = useSelector(selectNumOfLivingCells);
-  const numOfGenerations = useSelector(selectNumOfGenerations);
+interface SimulationStatsProps {
+  numOfLiveCells: number;
+  numOfGeneration: number;
+}
+
+const SimulationStats: FC<SimulationStatsProps> = ({
+  numOfLiveCells,
+  numOfGeneration,
+}) => {
   return (
     <Container>
       <StyledParagraph data-cy="generations-label">
-        Generations: {numOfGenerations}
+        Generations: {numOfGeneration}
       </StyledParagraph>
       <StyledParagraph data-cy="living-cells-label">
-        Living Cells: {numOfLivingCells}
+        Living Cells: {numOfLiveCells}
       </StyledParagraph>
     </Container>
   );
