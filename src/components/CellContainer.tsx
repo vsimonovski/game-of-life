@@ -1,14 +1,14 @@
 import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import { countNeighbourCells } from 'utils/cell';
 import { GridSize } from 'types';
-import { GRID_SIZE, NEIGHBOUR_CELL_COORDINATES, INTERVAL_MS } from 'config';
+import { GRID_SIZE, INTERVAL_MS } from 'config';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectSimulationStatus,
   selectCells,
   SET_CELL_VALUE,
   INCREASE_GENERATION_NUM,
+  SIMULATION_NEXT,
 } from 'components/simulationSlice';
 import Cell from 'components/Cell';
 
@@ -42,28 +42,11 @@ const CellContainer = () => {
 
     const simulationInterval = setInterval(() => {
       dispatch(INCREASE_GENERATION_NUM());
-
-      cells.forEach((rows, rowId) =>
-        rows.forEach((_, colId) => {
-          const count = countNeighbourCells(
-            NEIGHBOUR_CELL_COORDINATES,
-            GRID_SIZE,
-            cells,
-            rowId,
-            colId
-          );
-
-          if (cells[rowId][colId] && (count < 2 || count > 3))
-            dispatch(SET_CELL_VALUE(rowId, colId));
-
-          if (!cells[rowId][colId] && count === 3)
-            dispatch(SET_CELL_VALUE(rowId, colId));
-        })
-      );
+      dispatch(SIMULATION_NEXT());
     }, INTERVAL_MS);
 
     return () => clearInterval(simulationInterval);
-  }, [isSimulationRunning, cells, dispatch]);
+  }, [isSimulationRunning, dispatch]);
 
   return (
     <Container gridSize={GRID_SIZE}>

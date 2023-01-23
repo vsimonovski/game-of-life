@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from 'store';
-import { initialiseCells } from 'utils/cell';
-import { GRID_SIZE } from 'config';
+import { countNeighbourCells, initialiseCells } from 'utils/cell';
+import { GRID_SIZE, NEIGHBOUR_CELL_COORDINATES } from 'config';
 import { Cells } from 'types';
 
 interface SimulationState {
@@ -41,6 +41,29 @@ export const simulationSlice = createSlice({
           ).length)
       );
     },
+    SIMULATION_NEXT: (state) => {
+      state.cells = state.cells.map((rows, rowId) =>
+        rows.map((cols, colId) => {
+          const count = countNeighbourCells(
+            NEIGHBOUR_CELL_COORDINATES,
+            GRID_SIZE,
+            state.cells,
+            rowId,
+            colId
+          );
+
+          if (state.cells[rowId][colId] && (count < 2 || count > 3)) {
+            return false;
+          }
+
+          if (!state.cells[rowId][colId] && count === 3) {
+            return true;
+          }
+
+          return cols;
+        })
+      );
+    },
     SET_CELL_VALUE: {
       reducer(state, action: PayloadAction<{ rowId: number; colId: number }>) {
         const { rowId, colId } = action.payload;
@@ -69,6 +92,7 @@ export const {
   SIMULATION_PAUSE,
   SIMULATION_RESET,
   SIMULATION_RANDOMISE,
+  SIMULATION_NEXT,
   SET_CELL_VALUE,
   INCREASE_GENERATION_NUM,
 } = simulationSlice.actions;
