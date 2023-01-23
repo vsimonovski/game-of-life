@@ -31,7 +31,7 @@ Grid size, generation interval, and random factor can be adjusted inside `config
 
 ## 🗒 Notes
 
-- I decided to use Redux Tookit in order to achieve as clean as possible solution, I tried version without Redux but I wasn't satisfied with the outcome
+- I decided to use Redux Tookit in order to achieve as clean as possible solution, I tried version without Redux but I wasn't satisfied with the outcome (version without redux is available on "no-redux" branch)
 - I had to upgrade version of Typescript in order to add Redux Tookit
 - I had to upgrade version of React in order to add Jest and Cypress
 
