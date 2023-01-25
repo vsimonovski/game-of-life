@@ -1,4 +1,3 @@
-import { NEIGHBOUR_CELL_COORDINATES } from 'config';
 import { Cells, GridSize } from 'types';
 import { initialiseCells, countNeighbourCells } from './cell';
 
@@ -48,14 +47,7 @@ describe('countNeighbourCells util', () => {
       cells: Cells,
       rowId: number,
       colId: number
-    ) =>
-      countNeighbourCells(
-        NEIGHBOUR_CELL_COORDINATES,
-        mockGridSize,
-        cells,
-        rowId,
-        colId
-      );
+    ) => countNeighbourCells(mockGridSize, cells, rowId, colId);
 
     expect(neighbourCellCountWrapper(mockCells, 1, 1)).toBe(4);
     expect(neighbourCellCountWrapper(mockCells, 0, 1)).toBe(3);

@@ -2,12 +2,12 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import {
-  selectSimulationStatus,
-  SIMULATION_START,
-  SIMULATION_PAUSE,
+  SIMULATION_TOGGLE,
   SIMULATION_RESET,
   SIMULATION_RANDOMISE,
-  selectNumOfLivingCells,
+  SIMULATION_NEXT,
+  selectSimulationStatus,
+  selectNumOfLivingCellsStatus,
 } from 'components/simulationSlice';
 import Button from './Button';
 import { device } from 'globalStyles';
@@ -24,45 +24,35 @@ const Container = styled.section`
 
 const SimulationControls = () => {
   const dispatch = useDispatch();
+  const hasLivingCells = useSelector(selectNumOfLivingCellsStatus);
   const isSimulationRunning = useSelector(selectSimulationStatus);
-  const numOfLivingCells = useSelector(selectNumOfLivingCells);
-  const isBtnDisabled = !numOfLivingCells && !isSimulationRunning;
-
-  const handleSimulationStatusChange = () => {
-    dispatch(!isSimulationRunning ? SIMULATION_START() : SIMULATION_PAUSE());
-  };
-
-  const handleSimulationReset = () => {
-    dispatch(SIMULATION_RESET());
-  };
-
-  const handleSimulationRandomise = () => {
-    dispatch(SIMULATION_RANDOMISE());
-  };
 
   return (
     <Container>
       <Button
         dataCy="run-btn"
-        isDisabled={isBtnDisabled}
-        onClick={handleSimulationStatusChange}
-      >
-        {isSimulationRunning ? 'Stop' : 'Start'} simulation
-      </Button>
+        text={`${isSimulationRunning ? 'Stop' : 'Start'} simulation`}
+        isDisabled={!hasLivingCells && !isSimulationRunning}
+        onClick={() => dispatch(SIMULATION_TOGGLE())}
+      />
       <Button
-        dataCy="reset-btn"
-        isDisabled={isBtnDisabled}
-        onClick={handleSimulationReset}
-      >
-        Reset
-      </Button>
+        dataCy="next-btn"
+        text={'Next generation'}
+        isDisabled={isSimulationRunning || !hasLivingCells}
+        onClick={() => dispatch(SIMULATION_NEXT())}
+      />
       <Button
         dataCy="randomise-btn"
+        text={'Randomise'}
         isDisabled={isSimulationRunning}
-        onClick={handleSimulationRandomise}
-      >
-        Randomise
-      </Button>
+        onClick={() => dispatch(SIMULATION_RANDOMISE())}
+      />
+      <Button
+        dataCy="reset-btn"
+        text={'Reset'}
+        isDisabled={!hasLivingCells && !isSimulationRunning}
+        onClick={() => dispatch(SIMULATION_RESET())}
+      />
     </Container>
   );
 };

@@ -4,7 +4,6 @@ import { device } from 'globalStyles';
 
 const StyledButton = styled.button`
   border-radius: var(--size-xs);
-  width: 200px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1.6em;
@@ -32,14 +31,14 @@ const StyledButton = styled.button`
 interface ButtonProps {
   isDisabled: boolean;
   onClick: () => void;
-  children: React.ReactNode;
   dataCy: string;
+  text: string;
 }
 
-const Button: FC<ButtonProps> = ({ isDisabled, onClick, children, dataCy }) => {
+const Button: FC<ButtonProps> = ({ isDisabled, onClick, dataCy, text }) => {
   return (
     <StyledButton disabled={isDisabled} onClick={onClick} data-cy={dataCy}>
-      {children}
+      {text}
     </StyledButton>
   );
 };

@@ -6,6 +6,7 @@ import {
   selectNumOfLivingCells,
 } from 'components/simulationSlice';
 import { device } from 'globalStyles';
+import Counter from './Counter';
 
 const Container = styled.section`
   display: flex;
@@ -16,29 +17,21 @@ const Container = styled.section`
   }
 `;
 
-const StyledParagraph = styled.p`
-  font-weight: 500;
-  font-size: 1.6em;
-  margin: 0;
-  padding: var(--size-sm);
-
-  @media ${device.mobile} {
-    padding: var(--size-xxs);
-    text-align: center;
-  }
-`;
-
 const SimulationStats = () => {
   const numOfLivingCells = useSelector(selectNumOfLivingCells);
   const numOfGenerations = useSelector(selectNumOfGenerations);
   return (
     <Container>
-      <StyledParagraph data-cy="generations-label">
-        Generations: {numOfGenerations}
-      </StyledParagraph>
-      <StyledParagraph data-cy="living-cells-label">
-        Living Cells: {numOfLivingCells}
-      </StyledParagraph>
+      <Counter
+        dataCy="generations-label"
+        label="Generations"
+        count={numOfGenerations}
+      />
+      <Counter
+        dataCy="living-cells-label"
+        label="Living Cells"
+        count={numOfLivingCells}
+      />
     </Container>
   );
 };

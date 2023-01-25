@@ -4,11 +4,10 @@ import { GridSize } from 'types';
 import { GRID_SIZE, INTERVAL_MS } from 'config';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  selectSimulationStatus,
   selectCells,
-  SET_CELL_VALUE,
-  INCREASE_GENERATION_NUM,
+  CELL_TOGGLE,
   SIMULATION_NEXT,
+  selectSimulationStatus,
 } from 'components/simulationSlice';
 import Cell from 'components/Cell';
 
@@ -27,12 +26,12 @@ const Container = styled.section`
 
 const CellContainer = () => {
   const dispatch = useDispatch();
-  const isSimulationRunning = useSelector(selectSimulationStatus);
   const cells = useSelector(selectCells);
+  const isSimulationRunning = useSelector(selectSimulationStatus);
 
   const onCellClick = useCallback(
     (rowId: number, colId: number) => {
-      dispatch(SET_CELL_VALUE(rowId, colId));
+      dispatch(CELL_TOGGLE(rowId, colId));
     },
     [dispatch]
   );
@@ -41,7 +40,6 @@ const CellContainer = () => {
     if (!isSimulationRunning) return;
 
     const simulationInterval = setInterval(() => {
-      dispatch(INCREASE_GENERATION_NUM());
       dispatch(SIMULATION_NEXT());
     }, INTERVAL_MS);
 
