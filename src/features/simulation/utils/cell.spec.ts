@@ -1,5 +1,5 @@
-import { Cells, GridSize } from 'types';
 import { initialiseCells, countNeighbourCells } from './cell';
+import { GridSize, Cells } from '../types';
 
 describe('initialiseCells util', () => {
   const mockGridSize: GridSize = { rows: 3, cols: 3 };

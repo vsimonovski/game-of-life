@@ -1,8 +1,11 @@
-import React from 'react';
 import styled from 'styled-components';
-import SimulationControls from 'components/SimulationControls';
-import CellContainer from 'components/CellContainer';
-import SimulationStats from 'components/SimulationStats';
+import {
+  SimulationControls,
+  CellGrid,
+  SimulationStats,
+} from '@/features/simulation';
+import { Provider } from 'react-redux';
+import { store } from '@/store';
 
 const Container = styled.section`
   display: flex;
@@ -19,9 +22,11 @@ export function App() {
     <>
       <StyledHeader data-cy="title">Game of Life</StyledHeader>
       <Container>
-        <CellContainer />
-        <SimulationControls />
-        <SimulationStats />
+        <Provider store={store}>
+          <CellGrid />
+          <SimulationControls />
+          <SimulationStats />
+        </Provider>
       </Container>
     </>
   );

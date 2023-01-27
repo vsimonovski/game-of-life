@@ -1,17 +1,12 @@
-import React, { useEffect, useCallback } from 'react';
+import { useCallback } from 'react';
 import styled from 'styled-components';
-import { GridSize } from 'types';
-import { GRID_SIZE, INTERVAL_MS } from 'config';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectCells,
-  CELL_TOGGLE,
-  SIMULATION_NEXT,
-  selectSimulationStatus,
-} from 'components/simulationSlice';
-import Cell from 'components/Cell';
+import { GRID_SIZE } from '@/config';
+import { GridSize } from '../types';
+import { CELL_TOGGLE, selectCells } from '../store';
+import { MemoizedCell } from './Cell';
 
-const Container = styled.section`
+const Grid = styled.section`
   display: grid;
   margin: 0 auto;
   grid-template-columns: ${({ gridSize }: { gridSize: GridSize }) =>
@@ -24,42 +19,30 @@ const Container = styled.section`
   width: fit-content;
 `;
 
-const CellContainer = () => {
+export const CellGrid = () => {
   const dispatch = useDispatch();
   const cells = useSelector(selectCells);
-  const isSimulationRunning = useSelector(selectSimulationStatus);
 
-  const onCellClick = useCallback(
+  const handleCellClick = useCallback(
     (rowId: number, colId: number) => {
       dispatch(CELL_TOGGLE(rowId, colId));
     },
     [dispatch]
   );
 
-  useEffect(() => {
-    if (!isSimulationRunning) return;
-
-    const simulationInterval = setInterval(() => {
-      dispatch(SIMULATION_NEXT());
-    }, INTERVAL_MS);
-
-    return () => clearInterval(simulationInterval);
-  }, [isSimulationRunning, dispatch]);
-
   return (
-    <Container gridSize={GRID_SIZE}>
+    <Grid gridSize={GRID_SIZE}>
       {cells.map((rows, rowId) =>
         rows.map((_, colId) => (
-          <Cell
+          <MemoizedCell
             isAlive={cells[rowId][colId]}
             key={`${rowId}${colId}`}
             rowId={rowId}
             colId={colId}
-            handleCellClick={onCellClick}
+            onClick={handleCellClick}
           />
         ))
       )}
-    </Container>
+    </Grid>
   );
 };
-export default CellContainer;

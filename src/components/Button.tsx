@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
-import { device } from 'globalStyles';
+import { device } from '@/style';
 
 const StyledButton = styled.button`
   border-radius: var(--size-xs);
@@ -35,11 +35,15 @@ interface ButtonProps {
   text: string;
 }
 
-const Button: FC<ButtonProps> = ({ isDisabled, onClick, dataCy, text }) => {
+export const Button: FC<ButtonProps> = ({
+  isDisabled,
+  onClick,
+  dataCy,
+  text,
+}) => {
   return (
     <StyledButton disabled={isDisabled} onClick={onClick} data-cy={dataCy}>
       {text}
     </StyledButton>
   );
 };
-export default Button;

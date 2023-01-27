@@ -1,12 +1,11 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import {
   selectNumOfGenerations,
   selectNumOfLivingCells,
-} from 'components/simulationSlice';
-import { device } from 'globalStyles';
-import Counter from './Counter';
+} from '@/features/simulation';
+import { device } from '@/style';
+import { MemoizedCounter } from '@/components';
 
 const Container = styled.section`
   display: flex;
@@ -17,17 +16,17 @@ const Container = styled.section`
   }
 `;
 
-const SimulationStats = () => {
+export const SimulationStats = () => {
   const numOfLivingCells = useSelector(selectNumOfLivingCells);
   const numOfGenerations = useSelector(selectNumOfGenerations);
   return (
     <Container>
-      <Counter
+      <MemoizedCounter
         dataCy="generations-label"
         label="Generations"
         count={numOfGenerations}
       />
-      <Counter
+      <MemoizedCounter
         dataCy="living-cells-label"
         label="Living Cells"
         count={numOfLivingCells}
@@ -35,4 +34,3 @@ const SimulationStats = () => {
     </Container>
   );
 };
-export default SimulationStats;

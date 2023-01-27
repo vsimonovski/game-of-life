@@ -1,5 +1,5 @@
-import { NEIGHBOUR_CELL_COORDINATES, RANDOM_FACTOR } from 'config';
-import { Cells, GridSize } from 'types';
+import { NEIGHBOUR_CELL_COORDINATES, RANDOM_FACTOR } from '@/config';
+import { Cells, GridSize } from '../types';
 
 export const initialiseCells = (
   gridSize: GridSize,
