@@ -1,12 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from 'store';
-import { countNeighbourCells, initialiseCells } from 'utils/cell';
-import { GRID_SIZE } from 'config';
-import { Cells } from 'types';
+import type { RootState } from '@/store';
+import { GRID_SIZE } from '@/config';
+import { Cells } from '../types';
+import { countNeighbourCells, initialiseCells } from '../utils/cell';
 
 interface SimulationState {
-  isSimulationRunning: boolean;
   hasLivingCells: boolean;
   cells: Cells;
   numOfLivingCells: number;
@@ -14,7 +13,6 @@ interface SimulationState {
 }
 
 const initialState: SimulationState = {
-  isSimulationRunning: false,
   hasLivingCells: false,
   cells: initialiseCells(GRID_SIZE),
   numOfLivingCells: 0,
@@ -25,9 +23,6 @@ export const simulationSlice = createSlice({
   name: 'simulation',
   initialState,
   reducers: {
-    SIMULATION_TOGGLE: (state) => {
-      state.isSimulationRunning = !state.isSimulationRunning;
-    },
     SIMULATION_RESET: () => initialState,
     SIMULATION_RANDOMISE: (state) => {
       state.cells = initialiseCells(GRID_SIZE, true);
@@ -89,15 +84,12 @@ export const simulationSlice = createSlice({
 });
 
 export const {
-  SIMULATION_TOGGLE,
   SIMULATION_RESET,
   SIMULATION_RANDOMISE,
   SIMULATION_NEXT,
   CELL_TOGGLE,
 } = simulationSlice.actions;
 
-export const selectSimulationStatus = (state: RootState) =>
-  state.simulation.isSimulationRunning;
 export const selectNumOfLivingCellsStatus = (state: RootState) =>
   state.simulation.hasLivingCells;
 export const selectCells = (state: RootState) => state.simulation.cells;
@@ -105,5 +97,3 @@ export const selectNumOfLivingCells = (state: RootState) =>
   state.simulation.numOfLivingCells;
 export const selectNumOfGenerations = (state: RootState) =>
   state.simulation.numOfGenerations;
-
-export default simulationSlice.reducer;

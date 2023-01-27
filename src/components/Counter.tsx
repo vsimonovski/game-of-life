@@ -1,7 +1,6 @@
-import React, { memo } from 'react';
-import { device } from 'globalStyles';
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import styled from 'styled-components';
+import { device } from '@/style';
 
 const StyledParagraph = styled.p`
   font-weight: 500;
@@ -28,4 +27,4 @@ const Counter: FC<CounterProps> = ({ label, count, dataCy }) => {
     </StyledParagraph>
   );
 };
-export default memo(Counter);
+export const MemoizedCounter = memo(Counter);

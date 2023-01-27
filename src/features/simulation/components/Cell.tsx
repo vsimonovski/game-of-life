@@ -1,6 +1,6 @@
-import React, { memo, FC } from 'react';
+import { memo, FC } from 'react';
 import styled from 'styled-components';
-import { device } from 'globalStyles';
+import { device } from '@/style';
 
 const StyledCell = styled.div`
   width: 15px;
@@ -25,15 +25,15 @@ interface CellProps {
   isAlive: boolean;
   rowId: number;
   colId: number;
-  handleCellClick: (rowId: number, coldId: number) => void;
+  onClick: (rowId: number, coldId: number) => void;
 }
 
-const Cell: FC<CellProps> = ({ isAlive, handleCellClick, rowId, colId }) => (
+const Cell: FC<CellProps> = ({ isAlive, onClick, rowId, colId }) => (
   <StyledCell
     data-cy="cell"
     isAlive={isAlive}
-    onClick={() => handleCellClick(rowId, colId)}
+    onClick={() => onClick(rowId, colId)}
   />
 );
 
-export default memo(Cell);
+export const MemoizedCell = memo(Cell);

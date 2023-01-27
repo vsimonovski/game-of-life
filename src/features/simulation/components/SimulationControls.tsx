@@ -1,16 +1,15 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import {
-  SIMULATION_TOGGLE,
-  SIMULATION_RESET,
-  SIMULATION_RANDOMISE,
-  SIMULATION_NEXT,
-  selectSimulationStatus,
   selectNumOfLivingCellsStatus,
-} from 'components/simulationSlice';
-import Button from './Button';
-import { device } from 'globalStyles';
+  SIMULATION_NEXT,
+  SIMULATION_RANDOMISE,
+  SIMULATION_RESET,
+} from '@/features/simulation';
+import { Button } from '@/components/Button';
+import { device } from '@/style';
+import { INTERVAL_MS } from '@/config';
 
 const Container = styled.section`
   display: flex;
@@ -22,10 +21,25 @@ const Container = styled.section`
   }
 `;
 
-const SimulationControls = () => {
+export const SimulationControls = () => {
   const dispatch = useDispatch();
+  const [isSimulationRunning, setSimulationRunning] = useState(false);
   const hasLivingCells = useSelector(selectNumOfLivingCellsStatus);
-  const isSimulationRunning = useSelector(selectSimulationStatus);
+
+  const handleResetClick = () => {
+    dispatch(SIMULATION_RESET());
+    setSimulationRunning(false);
+  };
+
+  useEffect(() => {
+    if (!isSimulationRunning) return;
+
+    const simulationInterval = setInterval(() => {
+      dispatch(SIMULATION_NEXT());
+    }, INTERVAL_MS);
+
+    return () => clearInterval(simulationInterval);
+  }, [isSimulationRunning, dispatch]);
 
   return (
     <Container>
@@ -33,7 +47,7 @@ const SimulationControls = () => {
         dataCy="run-btn"
         text={`${isSimulationRunning ? 'Stop' : 'Start'} simulation`}
         isDisabled={!hasLivingCells && !isSimulationRunning}
-        onClick={() => dispatch(SIMULATION_TOGGLE())}
+        onClick={() => setSimulationRunning(!isSimulationRunning)}
       />
       <Button
         dataCy="next-btn"
@@ -51,9 +65,8 @@ const SimulationControls = () => {
         dataCy="reset-btn"
         text={'Reset'}
         isDisabled={!hasLivingCells && !isSimulationRunning}
-        onClick={() => dispatch(SIMULATION_RESET())}
+        onClick={handleResetClick}
       />
     </Container>
   );
 };
-export default SimulationControls;

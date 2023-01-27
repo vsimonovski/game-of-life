@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import simulationReducer from 'components/simulationSlice';
+import { simulationSlice } from '@/features/simulation';
 
 export const store = configureStore({
   reducer: {
-    simulation: simulationReducer,
+    simulation: simulationSlice.reducer,
   },
 });
 
