@@ -1,5 +1,6 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+/* eslint @typescript-eslint/no-var-requires: 0 */
 const path = require('path');
+const jestConfig = require('./jest.config');
 
 module.exports = {
   webpack: {
@@ -8,10 +9,6 @@ module.exports = {
     },
   },
   jest: {
-    configure: {
-      moduleNameMapper: {
-        '^@/(.*)$': '<rootDir>/src/$1',
-      },
-    },
+    configure: jestConfig,
   },
 };
