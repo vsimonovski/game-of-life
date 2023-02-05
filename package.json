@@ -29,7 +29,7 @@
     ],
     "*.{ts, tsx}": [
       "eslint --fix",
-      "jest --bail --findRelatedTests"
+      "npm run test --bail --findRelatedTests"
     ]
   },
   "devDependencies": {
