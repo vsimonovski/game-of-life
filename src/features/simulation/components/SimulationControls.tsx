@@ -7,7 +7,7 @@ import {
   SIMULATION_RANDOMISE,
   SIMULATION_RESET,
 } from '@/features/simulation';
-import { Button } from '@/components/Button';
+import { Button } from '@/components';
 import { device } from '@/style';
 import { INTERVAL_MS } from '@/config';
 
